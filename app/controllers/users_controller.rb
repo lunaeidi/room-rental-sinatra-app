@@ -22,7 +22,9 @@ class UsersController < ApplicationController
       erb :'users/signup'
     else
       redirect '/rooms'
+    end
   end
+
   post '/signup' do
     @user = User.create(:email => params[:email], :password => params[:password])
     session[:user_id] = @user.id
