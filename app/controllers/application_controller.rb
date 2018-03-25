@@ -2,6 +2,13 @@ class ApplicationController < Sintra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
-end
+    enable :sessions
+    set :session_secret, "secret" #does it matter what this is called here?
+  end
 get '/' do
-end 
+end
+helpers do
+  def logged_in?
+      !!session[:user_id]
+    end
+end
