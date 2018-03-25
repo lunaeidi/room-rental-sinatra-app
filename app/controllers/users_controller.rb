@@ -1,2 +1,31 @@
 class UsersController < ApplicationController
-end 
+  get '/login' do
+    erb :"sessions/login.html"
+  end
+
+  post '/login' do #check if a user with this email actuallyexists, if so, set the session
+    user = User.find_by(:email => params[:email])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id #or session[:email] = user.email
+      redirect "/rooms"
+    else
+      redirect to '/signup'
+    end
+  end
+
+  get '/logout' do
+    session.clear
+    redirect to '/login'
+  end
+  get '/signup' do
+    if !session[:user_id]
+      erb :'users/signup'
+    else
+      redirect '/rooms'
+  end
+  post '/signup' do
+    @user = User.create(:email => params[:email], :password => params[:password])
+    session[:user_id] = @user.id
+    #need to decide where to redirect to. either 'users/home' or '/rooms'
+  end
+end

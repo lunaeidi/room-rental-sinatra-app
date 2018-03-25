@@ -8,6 +8,6 @@ require_relative './config/environment'
 
 use Rack::MethodOverride
 use RoomsController
-use SessionsController
+
 use UsersController
 run ApplicationController
