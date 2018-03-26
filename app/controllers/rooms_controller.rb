@@ -27,25 +27,24 @@ class RoomsController < ApplicationController
     erb :'/rooms/show'
   end
   get '/rooms/:id/edit' do
-    #redirect_if_not_logged_in
-    #@error_message= params[:error]
-    #room= Room.find(params[:id])
-    #erb :'rooms/edit'
-    if !logged_in?
+        if !logged_in?
       redirect "/login"
-    else
-      @room= current_user.rooms.find_by(params[:id]) #current_user.rooms returns empty array
-      #binding.pry
+    end
+
+      #if @room= current_user.rooms.find(params[:id]) #current_user.rooms returns empty array
+    @room= Room.find(params[:id])
+#ALWAYS FINDING THE SAME ONE! THE ONE WITH ID:9
     if @room.user_id= current_user.id #gives undefined user_id for nil class. room is nil because no listings.
       erb :'rooms/edit'
+
     else
       redirect '/rooms'
   end
 end
-end
-post '/rooms/:id' do
-  @room= Room.find(params[:id])
-  @room.title= params[:listing_title]
+patch '/rooms/:id' do
+  @room= Room.find(params[:id]) #WHY IS IT ALWAYS GOING TO ID 9?
+
+  @room.listing_title= params[:listing_title]
   @room.location= params[:location]
   @room.cost= params[:cost]
   @room.occupancy= params[:occupancy]
@@ -57,9 +56,11 @@ delete '/rooms/:id/delete' do
   if !logged_in?
     redirect "/login"
   else
-    room= current_user.rooms.find_by(params[:id])
+    room= current_user.rooms.find(params[:id]) #find_by wasnt working
+
   if room.user_id= current_user.id
     @room=Room.find_by_id(params[:id])
+
     @room.delete
     redirect to '/rooms'
   else
