@@ -2,9 +2,9 @@
 <a href="/rooms/new">Create new listing</a>
 <%@rooms.each do |room|%>
 <a href="/rooms/<%=room.id%>"><h3><%=room.listing_title%></h3></a>
-<p><%=room.location%><p>
-<p><%=room.cost%>
-<p><%=room.occupancy%>
+<p><%=room.location%> - <%=room.cost%> - <%=room.occupancy%>
+<%end%>
+<br><br>
 <%if session[:user_id]%>
 <a href="/users/logout">Log out</a>
 <%end%>
