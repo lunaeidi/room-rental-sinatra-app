@@ -1,8 +1,10 @@
 class RoomsController < ApplicationController
   get '/rooms' do
-    "You are logged in #{session[:email]}"
+    "You are logged in #{session[:email
+    @rooms= Room.all
+    erb :'rooms/index'
   end
-  get 'rooms/new' do
+  get '/rooms/new' do
     #redirect_if_not_logged_in
     #@error_message= params[:error]
      #or
@@ -10,7 +12,13 @@ class RoomsController < ApplicationController
   #  redirect "/login" and else ... erb
     erb :'rooms/new'
   end
-  get '/posts/:id/edit' do
+  post '/rooms' do
+    @room=Room.create(params) #is that enough???
+  end
+  get '/rooms/:id' do
+    @room= Room.find(params[:id])
+  end
+  get '/rooms/:id/edit' do
     #redirect_if_not_logged_in
     #@error_message= params[:error]
     #room= Room.find(params[:id])
@@ -23,8 +31,10 @@ class RoomsController < ApplicationController
       erb :'rooms/edit'
     else
       redirect '/rooms'
-
   end
 end
+end
+post '/rooms/:id' do
+  @room= Room.find(params[:id])
 end
 end
