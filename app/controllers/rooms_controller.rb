@@ -41,10 +41,27 @@ end
 end
 post '/rooms/:id' do
   @room= Room.find(params[:id])
+  @room.title= params[:listing_title]
+  @room.location= params[:location]
+  @room.cost= params[:cost]
+  @room.occupancy= params[:occupancy]
+  @room.contact= params[:contact]
+  @room.save
+  redirect 'rooms/#{@room.id}'
 end
 delete '/rooms/:id/delete' do
-  @room=Room.find_by_id(params[:id])
-  @room.delete
-  redirect to '/rooms'
+  if !logged_in?
+    redirect "/login"
+  else
+    room= current_user.rooms.find_by(params[:id])
+  if room.user_id= current_user.id
+    @room=Room.find_by_id(params[:id])
+    @room.delete
+    redirect to '/rooms'
+  else
+    redirect '/rooms'
+  end
+end
+
 end
 end
