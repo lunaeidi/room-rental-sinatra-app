@@ -34,7 +34,7 @@ class RoomsController < ApplicationController
       #if @room= current_user.rooms.find(params[:id]) #current_user.rooms returns empty array
     @room= Room.find(params[:id])
 #ALWAYS FINDING THE SAME ONE! THE ONE WITH ID:9
-    if @room.user_id= current_user.id #gives undefined user_id for nil class. room is nil because no listings.
+    if @room.user_id== current_user.id 
       erb :'rooms/edit'
 
     else
@@ -55,18 +55,16 @@ end
 delete '/rooms/:id/delete' do
   if !logged_in?
     redirect "/login"
-  else
-    room= current_user.rooms.find(params[:id]) #find_by wasnt working
-
-  if room.user_id= current_user.id
-    @room=Room.find_by_id(params[:id])
-
-    @room.delete
+  end
+  #  room= current_user.rooms.find(params[:id]) #find_by wasnt working
+@room=Room.find(params[:id])
+  if room.user_id= current_user.id #or if current_user.rooms.include?(room)
+      @room.delete
     redirect to '/rooms'
   else
     redirect '/rooms'
   end
-end
+
 
 end
 end

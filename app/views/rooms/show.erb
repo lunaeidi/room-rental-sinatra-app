@@ -6,10 +6,15 @@
 <h3>Occupancy:<%=@room.occupancy%></h3>
 <h3>Contact:<%=@room.contact%></h3>
 
+<%if current_user.id == @room.user_id%>
 <form method="post"action="/rooms/<%=@room.id%>/delete">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit"value="delete">
 </form>
+<%end%>
+<%if current_user.id == @room.user_id%>
+<a href='/rooms/<%=@room.id%>/edit'>Edit Listing</a>
+<%end%>
 <br>
 
 <a href="/rooms">Go back to all listings</a>
