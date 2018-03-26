@@ -13,7 +13,10 @@ class RoomsController < ApplicationController
     erb :'rooms/new'
   end
   post '/rooms' do
+    binding.pry
     @room=Room.create(params) #is that enough???
+    redirect "/rooms/#{room.id}"
+    @pic= params[:pic]
   end
   get '/rooms/:id' do
     @room= Room.find(params[:id])
