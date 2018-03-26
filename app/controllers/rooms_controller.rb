@@ -23,6 +23,7 @@ class RoomsController < ApplicationController
   end
   get '/rooms/:id' do
     @room= Room.find(params[:id])
+    
 
     erb :'/rooms/show'
   end
@@ -34,7 +35,7 @@ class RoomsController < ApplicationController
       #if @room= current_user.rooms.find(params[:id]) #current_user.rooms returns empty array
     @room= Room.find(params[:id])
 #ALWAYS FINDING THE SAME ONE! THE ONE WITH ID:9
-    if @room.user_id== current_user.id 
+    if @room.user_id== current_user.id
       erb :'rooms/edit'
 
     else
