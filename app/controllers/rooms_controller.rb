@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
   get '/rooms' do
-    "You are logged in #{session[:email
+    "You are logged in #{session[:email]}"
     @rooms= Room.all
     erb :'rooms/index'
   end

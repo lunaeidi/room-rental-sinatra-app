@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   get '/login' do
-    erb :"sessions/login.html"
+    erb :"users/login"
   end
 
   post '/login' do #check if a user with this email actuallyexists, if so, set the session
@@ -29,5 +29,6 @@ class UsersController < ApplicationController
     @user = User.create(:email => params[:email], :password => params[:password])
     session[:user_id] = @user.id
     #need to decide where to redirect to. either 'users/home' or '/rooms'
+    redirect "/rooms"
   end
 end
