@@ -15,6 +15,9 @@ class RoomsController < ApplicationController
   post '/rooms' do
 
     @room=Room.create(params) #is that enough???
+    @room.user_id= current_user.id
+    current_user.rooms << @room #should this be necessary?
+
     redirect "/rooms/#{@room.id}"
     @pic= params[:pic]
   end
@@ -31,8 +34,9 @@ class RoomsController < ApplicationController
     if !logged_in?
       redirect "/login"
     else
-      room= current_user.rooms.find_by(params[:id])
-    if room.user_id= current_user.id
+      @room= current_user.rooms.find_by(params[:id]) #current_user.rooms returns empty array
+      #binding.pry
+    if @room.user_id= current_user.id #gives undefined user_id for nil class. room is nil because no listings.
       erb :'rooms/edit'
     else
       redirect '/rooms'
