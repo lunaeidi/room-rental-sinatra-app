@@ -42,4 +42,9 @@ end
 post '/rooms/:id' do
   @room= Room.find(params[:id])
 end
+delete '/rooms/:id/delete' do
+  @room=Room.find_by_id(params[:id])
+  @room.delete
+  redirect to '/rooms'
+end
 end
