@@ -10,15 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180326004942) do
+ActiveRecord::Schema.define(version: 20180326032313) do
 
   create_table "rooms", force: :cascade do |t|
     t.string "listing_title"
     t.string "occupancy"
     t.string "location"
-    t.decimal "cost"
+    t.decimal "cost", precision: 10, scale: 2
     t.integer "user_id"
     t.string "contact"
+    t.binary "pic"
   end
 
   create_table "users", force: :cascade do |t|
