@@ -1,12 +1,14 @@
 <!--order(cost) ? -->
-<h2>"You are logged in #{session[:email]}"<h2>
+<!--<h2>"You are logged in #{session[:email]}"<h2>-->
 <a href="/rooms/new">Create new listing</a>
 <%@rooms.each do |room|%>
-
+<figure>
 <img src="../../../public/<%=room.pic.split(",")[0][14..-2]%>"width="200"height="200">
 
-<a href="/rooms/<%=room.id%>"><h3><%=room.listing_title%></h3></a>
-<p><%=room.location%> - <%=room.cost%> - <%=room.occupancy%>
+<figcaption><a href="/rooms/<%=room.id%>"><h3><%=room.listing_title%></h3></a>
+<p><%=room.location%> - <%=room.cost%> - <%=room.occupancy%></figcaption>
+</figure>
+<br>
 <%end%>
 <br>
 <br><br>
