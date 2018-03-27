@@ -1,7 +1,7 @@
 include FileUtils
 class RoomsController < ApplicationController
   get '/rooms' do
-    "You are logged in #{session[:email]}"
+
     @rooms= Room.all
     erb :'rooms/index'
   end
@@ -30,7 +30,7 @@ session[:filename]= params[:pic][:filename]
 
 array= @room.pic.split(",")[0][14..-2]
 
-binding.pry
+
 
     redirect "/rooms/#{@room.id}"
 
@@ -73,7 +73,7 @@ delete '/rooms/:id/delete' do
   end
   #  room= current_user.rooms.find(params[:id]) #find_by wasnt working
 @room=Room.find(params[:id])
-  if room.user_id= current_user.id #or if current_user.rooms.include?(room)
+  if @room.user_id= current_user.id #or if current_user.rooms.include?(room)
       @room.delete
     redirect to '/rooms'
   else
