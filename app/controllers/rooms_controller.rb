@@ -26,20 +26,11 @@ File.open("./public/#{@filename}", 'wb') do |f|
   f.write(file.read)
 end
 session[:filename]= params[:pic][:filename]
-@pic= @room.pic
-#binding.pry
-     #or
-    #  cp(file.path, "public/#{@filename}")
-    #  or
 
-      #if params[:file]
-#   @filename = params[:file][:filename]
-#   tempfile = params[:file][:tempfile]
-#   target = "public/#{@filename)"
-#
-#   File.open(target, 'wb') {|f| f.write tempfile.read }
-# end
-#  end
+
+array= @room.pic.split(",")[0][14..-2]
+
+binding.pry
 
     redirect "/rooms/#{@room.id}"
 
