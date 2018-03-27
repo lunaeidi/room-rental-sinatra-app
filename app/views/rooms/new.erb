@@ -1,11 +1,11 @@
 <h1>Create a New Room Listing</h1>
-<form method="post"action="/rooms">
+<form method="post"action="/rooms"accept="image/*"enctype="multipart/form-data">
   <p>Title:<input type="text"name="listing_title"required></p>
   <p>Address:<input type="text"name="location"required></p>
   <p>Cost/month:<input type="text"name="cost"required></p>
   <p>Single, double, or triple room:<input type="text"name="occupancy"required></p>
   <p>Contact email:<input type="email"name="contact"required></p>
-  <p>Attach image:<input type="file" name="pic" accept="image/*"></p>
+  <p>Attach image:<input type="file" name="pic" ></p>
 
   <input type="submit"value="Create Listing">
 </form>

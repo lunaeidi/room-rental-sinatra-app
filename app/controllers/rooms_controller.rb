@@ -1,3 +1,4 @@
+include FileUtils
 class RoomsController < ApplicationController
   get '/rooms' do
     "You are logged in #{session[:email]}"
@@ -14,16 +15,35 @@ class RoomsController < ApplicationController
   end
   post '/rooms' do
 
-    @room=Room.create(params) #is that enough???
+    @room=Room.create(params)
     @room.user_id= current_user.id
     current_user.rooms << @room #should this be necessary?
 
+    if params[:file]
+    @filename = params[:pic][:filename]
+   file = params[:pic][:tempfile]
+
+   File.open("./public/#{@filename}", 'wb') do |f|
+     f.write(file.read)
+     #or
+    #  cp(file.path, "public/#{@filename}")
+    #  or
+
+      #if params[:file]
+#   @filename = params[:file][:filename]
+#   tempfile = params[:file][:tempfile]
+#   target = "public/#{@filename)"
+#
+#   File.open(target, 'wb') {|f| f.write tempfile.read }
+# end
+#  end
+
     redirect "/rooms/#{@room.id}"
-    @pic= params[:pic]
+
   end
   get '/rooms/:id' do
     @room= Room.find(params[:id])
-    
+
 
     erb :'/rooms/show'
   end
