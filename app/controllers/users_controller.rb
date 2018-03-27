@@ -26,9 +26,14 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
+
+    if user=User.find_by_email(params[:email]) #make error message
+      erb :'users/signup' #or redirect to error page that explains
+    else
     @user = User.create(:email => params[:email], :password => params[:password])
     session[:user_id] = @user.id
     #need to decide where to redirect to. either 'users/home' or '/rooms'
     redirect "/rooms"
+  end
   end
 end
