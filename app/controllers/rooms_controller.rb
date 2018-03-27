@@ -19,12 +19,15 @@ class RoomsController < ApplicationController
     @room.user_id= current_user.id
     current_user.rooms << @room #should this be necessary?
 
-    if params[:file]
     @filename = params[:pic][:filename]
-   file = params[:pic][:tempfile]
+file = params[:pic][:tempfile]
 
-   File.open("./public/#{@filename}", 'wb') do |f|
-     f.write(file.read)
+File.open("./public/#{@filename}", 'wb') do |f|
+  f.write(file.read)
+end
+session[:filename]= params[:pic][:filename]
+@pic= @room.pic
+#binding.pry
      #or
     #  cp(file.path, "public/#{@filename}")
     #  or
