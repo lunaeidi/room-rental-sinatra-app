@@ -48,7 +48,7 @@ array= @room.pic.split(",")[0][14..-2]
 
       #if @room= current_user.rooms.find(params[:id]) #current_user.rooms returns empty array
     @room= Room.find(params[:id])
-#ALWAYS FINDING THE SAME ONE! THE ONE WITH ID:9
+
     if @room.user_id== current_user.id
       erb :'rooms/edit'
 
@@ -57,7 +57,7 @@ array= @room.pic.split(",")[0][14..-2]
   end
 end
 patch '/rooms/:id' do
-  @room= Room.find(params[:id]) #WHY IS IT ALWAYS GOING TO ID 9?
+  @room= Room.find(params[:id])
 
   @room.listing_title= params[:listing_title]
   @room.location= params[:location]
@@ -65,7 +65,7 @@ patch '/rooms/:id' do
   @room.occupancy= params[:occupancy]
   @room.contact= params[:contact]
   @room.save
-  redirect 'rooms/#{@room.id}'
+  redirect "rooms/#{@room.id}" #had to use double quotes with interpolation
 end
 delete '/rooms/:id/delete' do
   if !logged_in?
