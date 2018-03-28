@@ -11,7 +11,11 @@ class RoomsController < ApplicationController
      #or
     # !if session[:email] && session[:email].empty?
   #  redirect "/login" and else ... erb
-    erb :'rooms/new'
+  if logged_in?
+      erb :'rooms/new'
+    else
+      redirect "/login"
+    end
   end
   post '/rooms' do
 
