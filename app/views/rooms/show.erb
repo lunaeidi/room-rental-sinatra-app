@@ -19,11 +19,11 @@
 <%if current_user.id == @room.user_id%>
 <a href='/rooms/<%=@room.id%>/edit'>Edit Listing</a>
 <%end%>
+<%end%>
 <br>
 
 <a href="/rooms">Go back to all listings</a>
 <br><br>
 <%if session[:user_id]%>
 <a href="/logout">Log out</a>
-<%end%>
 <%end%>
