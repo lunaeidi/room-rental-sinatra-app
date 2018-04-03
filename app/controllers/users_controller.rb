@@ -9,6 +9,7 @@ class UsersController < ApplicationController
       session[:user_id] = user.id #or session[:email] = user.email
       redirect "/rooms"
     else
+      @error_message2= "Invalid username or password" #maybeshould differ where directs to whether invalid username or password
       redirect to '/signup'
     end
   end
@@ -18,10 +19,11 @@ class UsersController < ApplicationController
     redirect to '/login'
   end
   get '/signup' do
+    @error_message2= "Invalid username or password"
     if !session[:user_id]
+      @error_message = "Username already exists"
       erb :'users/signup'
     else
-      @error_message = "Username already exists"
       redirect '/rooms'
     end
   end

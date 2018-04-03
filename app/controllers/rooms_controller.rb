@@ -40,6 +40,7 @@ array= @room.pic.split(",")[0][14..-2]
 
   end
   get '/rooms/:id' do
+    @error_message = "Username already exists"
     #@room= Room.find(params[:id])] #in this case params is from the dynamic route
     @room= Room.find(params[:id])
 
