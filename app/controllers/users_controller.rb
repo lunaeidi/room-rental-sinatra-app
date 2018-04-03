@@ -1,3 +1,5 @@
+require 'sinatra/base'
+require 'rack-flash'
 class UsersController < ApplicationController
   get '/login' do
     erb :"users/login"
@@ -9,6 +11,7 @@ class UsersController < ApplicationController
       session[:user_id] = user.id #or session[:email] = user.email
       redirect "/rooms"
     else
+        flash[:message] = "Invalid username or password"
       @error_message2= "Invalid username or password" #maybeshould differ where directs to whether invalid username or password
       redirect to '/signup'
     end
@@ -19,8 +22,9 @@ class UsersController < ApplicationController
     redirect to '/login'
   end
   get '/signup' do
-    @error_message2= "Invalid username or password"
+    #@error_message2= "Invalid username or password" does this need to go here ?
     if !session[:user_id]
+      flash[:message] = "Username already exists"
       @error_message = "Username already exists"
       erb :'users/signup'
     else

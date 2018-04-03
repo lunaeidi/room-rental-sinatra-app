@@ -1,3 +1,5 @@
+require 'sinatra/base'
+require 'rack-flash'
 include FileUtils
 class RoomsController < ApplicationController
   get '/rooms' do
@@ -40,7 +42,7 @@ array= @room.pic.split(",")[0][14..-2]
 
   end
   get '/rooms/:id' do
-    @error_message = "Username already exists"
+    @error_message = "Username already exists" #does this need to be here? 
     #@room= Room.find(params[:id])] #in this case params is from the dynamic route
     @room= Room.find(params[:id])
 
