@@ -1,6 +1,7 @@
 <!--order(cost) ? -->
 <!--<h2>"You are logged in #{session[:email]}"<h2>-->
 <a href="/rooms/new">Create new listing</a>
+<p><%= @error_message if @error_message %></p>
 <%@rooms.each do |room|%>
 <figure>
 <img src="../../../public/<%=room.pic.split(",")[0][14..-2]%>"width="200"height="200">
