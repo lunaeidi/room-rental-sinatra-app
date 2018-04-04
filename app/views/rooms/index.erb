@@ -1,5 +1,9 @@
 <!--order(cost) ? -->
 <!--<h2>"You are logged in #{session[:email]}"<h2>-->
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <a href="/rooms/new">Create new listing</a>
 <p><%= @error_message if @error_message %></p>
 <%@rooms.each do |room|%>

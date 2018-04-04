@@ -8,6 +8,7 @@ class RoomsController < ApplicationController
     erb :'rooms/index'
   end
   get '/rooms/new' do
+
     #redirect_if_not_logged_in
     #@error_message= params[:error]
      #or
@@ -16,6 +17,7 @@ class RoomsController < ApplicationController
   if logged_in?
       erb :'rooms/new'
     else
+      params[:message]= "You need to be logged in to make a listing." #not showing up. 
       redirect "/login"
     end
   end
@@ -42,8 +44,7 @@ array= @room.pic.split(",")[0][14..-2]
 
   end
   get '/rooms/:id' do
-    @error_message = "Username already exists" #does this need to be here? 
-    #@room= Room.find(params[:id])] #in this case params is from the dynamic route
+      #@room= Room.find(params[:id])] #in this case params is from the dynamic route
     @room= Room.find(params[:id])
 
 
@@ -61,6 +62,7 @@ array= @room.pic.split(",")[0][14..-2]
       erb :'rooms/edit'
 
     else
+      params[:message]= "You don't have permission to do that."
       redirect '/rooms'
   end
 end
