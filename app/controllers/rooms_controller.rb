@@ -67,8 +67,8 @@ array= @room.pic.split(",")[0][14..-2]
   end
 end
 patch '/rooms/:id' do
-  @room= Room.find(params[:id])
 
+  @room= Room.find(params[:id])
   @room.listing_title= params[:listing_title]
   @room.location= params[:location]
   @room.cost= params[:cost]

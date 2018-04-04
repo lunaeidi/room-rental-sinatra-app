@@ -1,6 +1,6 @@
 <form method="post"action="/rooms/<%=@room.id%>">
 <input type="hidden" name="_method" value="PATCH">
-<p>Title:<input type="text"[name="listing_title"value="<%=@room.listing_title%>"></p>
+<p>Title:<input type="text"name="listing_title"value="<%=@room.listing_title%>"></p>
 <p>Address:<input type="text"name="location"value="<%=@room.location%>"></p>
 <p>Cost/month:<input type="text"name="cost"value="<%=@room.cost%>"></p>
 <p>Single, double, or triple room:<input type="text"name="occupancy"value="<%=@room.occupancy%>"></p>
