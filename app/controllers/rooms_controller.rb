@@ -17,7 +17,7 @@ class RoomsController < ApplicationController
   if logged_in?
       erb :'rooms/new'
     else
-      params[:message]= "You need to be logged in to make a listing." #not showing up. 
+      flash[:message]= "You need to be logged in to make a listing." #should this be here ?
       redirect "/login"
     end
   end
@@ -62,7 +62,7 @@ array= @room.pic.split(",")[0][14..-2]
       erb :'rooms/edit'
 
     else
-      params[:message]= "You don't have permission to do that."
+      flash[:message]= "You don't have permission to do that."
       redirect '/rooms'
   end
 end
