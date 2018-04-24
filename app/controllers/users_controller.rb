@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       redirect "/rooms"
     else
         flash[:message] = "Invalid username or password"
-      @error_message2= "Invalid username or password"
+
       redirect to '/signup'
     end
   end

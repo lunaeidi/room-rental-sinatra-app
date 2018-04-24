@@ -18,10 +18,13 @@ class RoomsController < ApplicationController
     end
   end
   post '/rooms' do
+current_user.rooms.create(params)
 
-    @room=Room.create(params)
-    @room.user_id= current_user.id
-    current_user.rooms << @room #should this be necessary?
+    # @room=Room.create(params)
+    # @room.user_id= current_user.id
+    # current_user.rooms << @room
+
+
 
     @filename = params[:pic][:filename]
 file = params[:pic][:tempfile]
