@@ -5,15 +5,15 @@ class UsersController < ApplicationController
     erb :"users/login"
   end
 
-  post '/login' do #check if a user with this email actuallyexists, if so, set the session
+  post '/login' do
     user = User.find_by(:email => params[:email])
     if user && user.authenticate(params[:password])
-      session[:user_id] = user.id 
+      session[:user_id] = user.id
       redirect "/rooms"
     else
-        flash[:message] = "Invalid username or password" #this isnt showing up
-      @error_message2= "Invalid username or password" #maybeshould differ where directs to whether invalid username or password
-      redirect to '/signup' #should this direct to login or signup
+        flash[:message] = "Invalid username or password"
+      @error_message2= "Invalid username or password"
+      redirect to '/signup'
     end
   end
 
@@ -22,10 +22,10 @@ class UsersController < ApplicationController
     redirect to '/login'
   end
   get '/signup' do
-    #@error_message2= "Invalid username or password" does this need to go here ?
+
 
     if !session[:user_id]
-    #  flash[:message] = "Username already exists" #does it go here on in post '/signup'. here it comes from beginning.
+
           @error_message = "Username already exists"
       erb :'users/signup'
     else
@@ -35,15 +35,13 @@ class UsersController < ApplicationController
 
   post '/signup' do
 
-    if user=User.find_by_email(params[:email]) #make error message
+    if user=User.find_by_email(params[:email])
       flash[:message] = "Username already exists"
-      erb :'users/signup' #or redirect to error page that explains
+      erb :'users/signup'
     else
     @user = User.create(:email => params[:email], :password => params[:password])
     session[:user_id] = @user.id
-    #need to decide where to redirect to. either 'users/home' or '/rooms'
-
-    redirect "/rooms"
+      redirect "/rooms"
   end
   end
 end

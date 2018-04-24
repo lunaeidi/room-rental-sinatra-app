@@ -6,7 +6,7 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     use Rack::Flash
-    set :session_secret, "secret" #does it matter what this is called here?
+    set :session_secret, "secret"
   end
 get '/' do
   erb :index
