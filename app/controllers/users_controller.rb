@@ -22,12 +22,8 @@ class UsersController < ApplicationController
     redirect to '/login'
   end
   get '/signup' do
-
-
     if !session[:user_id]
-
-          @error_message = "Username already exists"
-      erb :'users/signup'
+        erb :'users/signup'
     else
       redirect '/rooms'
     end
