@@ -1,12 +1,11 @@
 # room-rental-sinatra-app
-# room-rental-sinatra-app
 
 
  In this app, you can list rooms in your home you have for rent in the Washington DC area, or view rooms available for rent.
 
  Install Instructions
 
- This is a web app that is simply accessible by visiting the website.
+To use this app, fork and clone the repo. Once cloned onto your own machine, cd to room-rental-sinatra-app and run bundle install. Then run using shotgun or any similar server runner.
 
  Contributing
 
